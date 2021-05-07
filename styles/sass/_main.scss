@@ -1,0 +1,23 @@
+main {
+  .battleContainer {
+    margin: 100px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pokemonContainer {
+    border: 3px solid #4d210a;
+    background-color: #4d210a;
+    text-align: center;
+
+    img {
+      height: 200px;
+      width: 200px;
+      margin: 50px auto;
+    }
+
+    .pokemonSelection {
+      margin-bottom: 200px;
+    }
+  }
+}

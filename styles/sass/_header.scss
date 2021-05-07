@@ -1,8 +1,25 @@
 header {
   img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
+
   nav {
+    padding: 5px 0;
+    background-color: #f9a97a;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      margin-left: 200px;
+    }
   }
 }
