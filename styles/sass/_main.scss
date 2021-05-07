@@ -2,7 +2,8 @@ main {
   .battleContainer {
     margin: 100px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .pokemonContainer {
