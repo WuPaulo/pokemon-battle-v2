@@ -1,10 +1,8 @@
 const app = {};
 
 app.getPokemon = () => {
-  console.log("hello");
-
   $.ajax({
-    url: `https://pokeapi.co/api/v2/pokemon/`,
+    url: `https://pokeapi.co/api/v2/pokemon/?limit=893`,
     method: "GET",
     dataType: "json",
   }).then((result) => {
@@ -13,10 +11,21 @@ app.getPokemon = () => {
 };
 
 app.pokemonOptions = (pokemonInfo) => {
-  console.log(pokemonInfo);
-  for (let pokemans in pokemonInfo.results) {
-    console.log(`${pokemans}`);
-  }
+  pokemonInfo.results.forEach((element, index, array) => {
+    const pokemonName = element.name;
+    const pokemonOptionAppend = `<option value="${pokemonName}">${pokemonName}</option>`;
+
+    $(".pokemonOptions").append(pokemonOptionAppend);
+  });
+};
+
+app.sortPokemon = () => {
+  $(".pokemonOptions.one").on("change", function () {
+    console.log(this.value);
+  });
+  $(".pokemonOptions.two").on("change", function () {
+    console.log(this.value);
+  });
 };
 
 app.init = function () {
@@ -25,4 +34,5 @@ app.init = function () {
 
 $(function () {
   app.init();
+  app.sortPokemon();
 });
