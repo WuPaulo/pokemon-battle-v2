@@ -7,6 +7,14 @@ app.getPokemon = () => {
     dataType: "json",
   }).then((result) => {
     app.pokemonOptions(result);
+    result.results.forEach((element, index, array) => {
+      const pokemonName = element.name;
+      $.ajax({
+        url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+        method: "GET",
+        dataType: "json",
+      }).then((res) => {});
+    });
   });
 };
 
