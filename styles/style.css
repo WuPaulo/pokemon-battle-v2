@@ -38,7 +38,7 @@ footer {
 }
 
 main .battleContainer {
-  margin: 100px 0;
+  margin-top: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -304,6 +304,7 @@ html {
 body,
 html {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
