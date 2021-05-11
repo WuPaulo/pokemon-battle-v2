@@ -1,59 +1,64 @@
 const app = {};
 // retrieve data from api
-app.getPokemon = () => {
+app.getPokemon = (typings) => {
   $.ajax({
     url: `https://pokeapi.co/api/v2/pokemon/?limit=893`,
     method: "GET",
     dataType: "json",
   }).then((result) => {
-    app.pokemonOptions(result);
-    // console.log(result.results);
-    // result.results.forEach((element, index, array) => {
-    //   const pokemonName = element.name;
-    //   $.ajax({
-    //     url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
-    //     method: "GET",
-    //     dataType: "json",
-    //   }).then((res) => {});
-    // });
+    // let sorted = result.filter(x => x)
+    result.results.forEach((element, index, array) => {
+      const pokemonLink = element.url;
+      $.ajax({
+        url: pokemonLink,
+        method: "GET",
+        dataType: "json",
+      }).then((res) => {
+        // if (res.types[0] == typings || res.types[1] == typings) {
+        app.pokemonOptions(res, typings);
+        // }
+      });
+    });
   });
 };
 
-//populates select dropdown options
-app.pokemonOptions = (pokemonInfo) => {
-  pokemonInfo.results.forEach((element, index, array) => {
-    const pokemonName = element.name;
+// populates select dropdown options
+app.pokemonOptions = (pokemonInfo, typingsagain) => {
+  if (
+    pokemonInfo.types[0] == typingsagain ||
+    pokemonInfo.types[1] == typingsagain
+  ) {
+    const pokemonName = pokemonInfo.name;
     const pokemonOptionAppend = `<option value="${pokemonName}">${pokemonName}</option>`;
+  }
 
-    $(".pokemonOptions").append(pokemonOptionAppend);
-  });
+  $(".pokemonOptions").append(pokemonOptionAppend);
 };
 
 app.sortPokemon = () => {
   $(".pokemonOptions.one").on("change", function () {
     console.log(this.value);
   });
+
   $(".pokemonOptions.two").on("change", function () {
     console.log(this.value);
   });
-};
 
-app.typeFilter = () => {
   $(".pokemonType.one").on("change", function () {
-    console.log(this.value);
+    let pokemonType = this.value;
+    console.log(pokemonType);
+    app.getPokemon(pokemonType);
   });
 };
 
 app.showPokemon = () => {};
 
 app.init = function () {
-  app.getPokemon();
+  app.sortPokemon();
+  app.showPokemon();
 };
 
 // function ready
 $(function () {
   app.init();
-  app.sortPokemon();
-  app.showPokemon();
-  app.typeFilter();
 });
